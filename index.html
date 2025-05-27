@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>프로젝트 여백 - 연기 스터디</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Application Structure Plan:
+        - Designed interactive structure: A single-page application (SPA) with a fixed top navigation bar. Content for different "pages" (Home, Study Sessions, About Yeobaek, Acting Resources) is dynamically loaded and displayed within the main content area using JavaScript.
+        - Key interactions: Clicking navigation links will smoothly scroll to the corresponding section or dynamically show/hide content blocks. Session cards toggle individual session detail visibility. Acting Resources section uses toggles for each concept.
+        - User flow: Users can easily navigate between thematic sections. Within Study Sessions, they first select a term, then select a specific week to view its detailed feedback. The Acting Resources section will provide detailed explanations of acting concepts via expandable toggles.
+        - WHY this structure was chosen for usability: This SPA approach provides a seamless, fast loading experience. The fixed navigation ensures easy access to all main sections. Grouping related content into distinct sections enhances readability and information hierarchy, making complex information digestible. Toggles for acting resources make the page less cluttered initially.
+    -->
+    <!-- Visualization & Content Choices:
+        - Report Info: Home Page Introduction -> Goal: Inform/Engage -> Viz/Presentation Method: Welcome text, core philosophy -> Interaction: None -> Justification: Set the tone and introduce the study -> Library/Method: HTML/CSS.
+        - Report Info: Study Sessions List -> Goal: Organize/Inform -> Viz/Presentation Method: List of session cards, expandable detail -> Interaction: Click to toggle detail visibility -> Justification: Provide structured access to past content -> Library/Method: HTML/CSS/JS.
+        - Report Info: About Yeobaek -> Goal: Inform/Inspire -> Viz/Presentation Method: Thematic text blocks, key vision points -> Interaction: None -> Justification: Convey core values and future aspirations -> Library/Method: HTML/CSS.
+        - Report Info: Acting Resources (Super Objective, Inner Monologue) -> Goal: Educate/Inform -> Viz/Presentation Method: Clickable toggle headers for each concept, revealing detailed articles with examples, tables, and highlighted key points -> Interaction: Click to expand/collapse -> Justification: Provide in-depth acting knowledge in a structured and user-friendly way -> Library/Method: HTML/CSS/JS.
+        - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. NO Chart.js or Plotly.js used.
+    -->
     <style>
         body {
             font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
@@ -46,9 +59,24 @@
             background-color: #FFFFFF; 
             border-radius: 0.75rem; 
             box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
-            padding: 2.5rem; 
+            /* 모바일에서 좌우 패딩을 줄여 콘텐츠 영역을 넓힘 */
+            padding: 1.5rem; /* 기존 2.5rem에서 줄임 */
             margin-bottom: 3rem; 
         }
+        /* 데스크톱에서는 기존 패딩 유지 */
+        @media (min-width: 768px) { /* md breakpoint */
+            .card {
+                padding: 2.5rem;
+            }
+        }
+        /* 모바일에서 메인 콘텐츠 영역의 좌우 패딩을 더 줄임 */
+        @media (max-width: 767px) { /* Small screens up to md breakpoint */
+            .container.mx-auto.px-4 {
+                padding-left: 0.75rem; /* px-3 */
+                padding-right: 0.75rem; /* px-3 */
+            }
+        }
+
         .highlight-quote {
             font-size: 1.5rem; 
             font-weight: 600; 
@@ -286,7 +314,7 @@
             border: 1px solid #D4BBAA;
             border-radius: 0.5rem;
             padding: 1.5rem;
-            /* margin-bottom: 1rem; */ /* 이 부분을 제거했습니다. */
+            /* margin-bottom: 1rem; */ 
             cursor: pointer;
             transition: background-color 0.2s ease, box-shadow 0.2s ease;
         }
@@ -340,7 +368,7 @@
             </div>
         </section>
 
-              <section id="sessions" class="content-section card">
+        <section id="sessions" class="content-section card">
             <h2 class="section-title">스터디 세션</h2>
             <p class="text-lg mb-6">
                 '프로젝트 여백'의 지난 스터디 세션들을 확인하고, 각 회차에서 다루었던 핵심 내용들을 복습할 수 있습니다.
@@ -401,8 +429,8 @@
                                     <h5 class="text-A87C5A mt-4">[흔해빠진 독서 팀] 피드백 요약 (「흔해빠진 독서」)</h5>
                                     <ul class="list-disc pl-5 space-y-1 text-md">
                                         <li><strong>전반적인 변화:</strong> 두 분 모두 표현력이 향상되었으며, 적극적인 표현 시도가 좋았습니다.</li>
-                                        <li><strong>혜인(동생):</strong> 과거 회상 대사 시 상상력을 발휘하여 실제 장면이 생생하게 그려지도록, 감정 이입과 상상력을 활용해야 합니다.</li>
-                                        <li><strong>예진(언니):</strong> 짧은 대사에도 캐릭터의 호흡을 담고, 리액션 타이밍을 현실적으로 가져가세요. 무대 공간을 적극적으로 활용하고, '책'의 상징적 의미와 대사의 깊은 의도를 분석해야 합니다.</li>
+                                        <li><strong>혜인 (언니):</strong> 과거 회상 대사 시 상상력을 발휘하여 실제 장면이 생생하게 그려지도록, 감정 이입과 상상력을 활용해야 합니다.</li>
+                                        <li><strong>예진 (동생):</strong> 짧은 대사에도 캐릭터의 호흡을 담고, 리액션 타이밍을 현실적으로 가져가세요. 무대 공간을 적극적으로 활용하고, '책'의 상징적 의미와 대사의 깊은 의도를 분석해야 합니다.</li>
                                     </ul>
                                     <h4 class="mt-6">3. 연기 기술 피드백 – 전체 배우 공통</h4>
                                     <ul class="list-disc pl-5 space-y-1 text-md">
@@ -587,7 +615,7 @@
                                         <li>엘리아 카잔의 내적 모놀로그 기법 정리본</li>
                                     </ul>
                                     <p class="text-md mt-2">두 개 모두 배우들이 직접 참고할 수 있는 문서 스타일로 별도 제공하겠습니다.<br>
-                                    바로 이어서 정리해드리겠습니다.</p>
+                                    바로 이어서 정리해드리겠습니다。</p>
                                 </div>
                             </div>
                             
@@ -598,7 +626,7 @@
                             <div id="session3-detail" class="session-detail">
                                 <div class="session-detail-content">
                                     <h3> 5/10 여백 0기 3주차 스터디 정리</h3>
-                                    <p class="mb-4 text-md">3주차 스터디에서는 각 팀의 심화된 대본 및 캐릭터 분석을 바탕으로 실제 블로킹에 적용하는 시간을 가졌다. 특히 모든 행동에는 이유가 있어야 한다는 연기 철학을 깊이 있게 다루며, 충동적인 행동조차도 '이유 있는 충동'이어야 한다는 점을 강조했다.</p>
+                                    <p class="mb-4 text-md">3주차 스터디에서는 각 팀의 심화된 대본 및 캐릭터 분석을 바탕으로 실제 블로킹에 적용하는 시간을 가졌다. 특히 모든 행동에는 이유가 있어야 한다는 연기 철학을 깊이 있게 다루며, 충동적인 행동조차도 '이유 있는 충동'이어야 한다는 점을 강조했다。</p>
 
                                     <h4>1. 종현·보라 팀 – 분석 정리 및 재블로킹</h4>
                                     <p class="text-md">2주차 불참으로 인해, 이번 주는 1주차 이후 심화된 분석 테이블 작업을 중심으로 진행했다. 사사키 캐릭터는 초반 분석과 비교해 성격 디테일이 강화되었고, 대사와 행동의 이유가 더 명확해졌다. 타카코는 AI 번역본을 넘어 직접 재번역을 시도하며 말투와 어조를 고상하게 다듬었는데, 이는 배우 자신의 감각에 맞게 텍스트를 조정하는 매우 긍정적인 과정이었다. 다만, 사사키의 경우 톤 자체를 바꾸기보다는 자신에게 맞는 방식으로 자연스럽게 조정하는 방향이 더 적합하다고 판단했다.<br>
@@ -631,7 +659,7 @@
                                         <li>대사를 익히는 데 그치지 않고, 상황/감정/행동/시선/소품 사용까지 감안하여 연습</li>
                                         <li>모든 팀: <strong>“모든 행동에는 이유가 있다”</strong>는 전제 아래, 자신만의 동기와 목표 세우기</li>
                                     </ul>
-                                    <p class="text-md mt-4">이런 흐름으로 계속 간다면, 각 팀마다 캐릭터 몰입도와 장면 구현력이 점점 깊어질 것으로 기대됩니다. 다음 주에도 캐릭터와 충분히 친해진 상태로 만납시다.</p>
+                                    <p class="text-md mt-4">이런 흐름으로 계속 간다면, 각 팀마다 캐릭터 몰입도와 장면 구현력이 점점 깊어질 것으로 기대됩니다. 다음 주에도 캐릭터와 충분히 친해진 상태로 만납시다。</p>
                                 </div>
                             </div>
                             
@@ -687,7 +715,7 @@
                             <div id="session1-detail" class="session-detail">
                                 <div class="session-detail-content">
                                     <h3>📚 4/26 여백 0기 1주차 스터디 정리</h3>
-                                    <p class="mb-4 text-md">이번 스터디에서는 연기의 본질과 배우로서의 준비 태도에 대한 중요한 메시지들이 강조되었다. 특히, 감정 표현 이전에 대본 분석의 중요성과 캐릭터에 깊이 몰입하는 방식에 대한 구체적인 지침이 제시되었다.</p>
+                                    <p class="mb-4 text-md">이번 1주차 스터디에서는 연기의 본질과 배우로서의 준비 태도에 대한 중요한 메시지들이 강조되었다. 특히, 감정 표현 이전에 대본 분석의 중요성과 캐릭터에 깊이 몰입하는 방식에 대한 구체적인 지침이 제시되었다.</p>
 
                                     <h4>1. 드라이 리딩의 필요성</h4>
                                     <p class="text-md">스터디에서는 <strong>드라이 리딩(dry reading)</strong>의 중요성이 강조되었다. 대본을 처음 읽을 때부터 억지로 감정을 주입하는 것은 ‘표현’이 아닌 ‘짐작’이나 ‘흉내’에 불과하다는 지적이었다. 특히 아마추어 배우들은 분석 없이 초반에 감정을 섣불리 적용하면, 이후에 아무리 분석하더라도 그 어설픈 느낌이 계속 따라붙는 경향이 있다는 점이 명확히 언급되었다.<br>
@@ -737,6 +765,7 @@
                 </div>
             </div>
         </section>
+
 
 
         <section id="acting-resources" class="content-section card">
